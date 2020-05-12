@@ -1,0 +1,15 @@
+ //@import 'vendor';
+.preloader {
+    @include vendor('display','flex');
+    @include vendor('justify-content', 'center');
+    @include vendor('align-items', 'center');
+    @include viewport-unit(height, 100vh);
+    @include viewport-unit(width, 100vw);
+    width: 100%;
+    background: rgba(0,0,0,0.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    @include vendor('transition', 'opacity 0.3s linear');
+}

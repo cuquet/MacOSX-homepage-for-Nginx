@@ -1,0 +1,10 @@
+Icon
+*.code-workspace
+html.old/
+html.old/*
+.vscode/
+.vscode/*
+.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map

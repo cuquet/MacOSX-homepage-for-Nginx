@@ -1,0 +1,73 @@
+// https://www.freecodecamp.org/news/the-100-correct-way-to-do-css-breakpoints-88d6a5ba1862/
+// https://codepen.io/davidgilbertson/pen/aBpJzO
+@mixin for-size($range) {
+    $xs:24rem; // 384px;
+    $sm:32rem; // 512px;
+    $phone-upper-boundary: 37.5rem; // 600px;
+    $md: 54rem; // 864px
+    $tablet-portrait-upper-boundary: 56.25rem; // 900px;
+    $lg:64rem; // 1024px
+    $tablet-landscape-upper-boundary: 75rem; // 1200px;
+    $xl: 80rem; // 1280px;
+    $desktop-upper-boundary: 112.5rem; // 1800px;
+  
+    @if $range == phone-only {
+      @media (max-width: #{$phone-upper-boundary - .063rem}) { @content; }
+    } @else if $range == phone-landscape-only {
+      @media (max-width: $lg) and (max-height: $sm) and (orientation:landscape){ @content; }
+    } @else if $range == tablet-portrait-up {
+      @media (min-width: $phone-upper-boundary) and (orientation:portrait) { @content; }
+    } @else if $range == tablet-portait-only {
+      @media (min-width: $phone-upper-boundary) and (max-width: $tablet-portrait-upper-boundary - .063rem) and (orientation:portrait) { @content; }
+    } @else if $range == tablet-landscape-up {
+      @media (min-width: $tablet-portrait-upper-boundary)  and (orientation:landscape) { @content; }
+    } @else if $range == tablet-landscape-only {
+      @media (min-width: $tablet-portrait-upper-boundary) and (max-width: $tablet-landscape-upper-boundary - .063rem) { @content; }
+    } @else if $range == desktop-up {
+      @media (min-width: $tablet-landscape-upper-boundary) { @content; }
+    } @else if $range == desktop-only {
+      @media (min-width: $tablet-landscape-upper-boundary) and (max-width: $desktop-upper-boundary - .063rem)  { @content; }
+    } @else if $range == big-desktop-up {
+      @media (min-width: $desktop-upper-boundary) { @content; }
+    }
+  }
+
+// https://gist.github.com/mavame/a95bc4bc6ede62fa4ab63a2643860c6d
+
+/*$breakpoints: (
+  xs: 24rem, // 384px
+  sm: 32rem, // 512px
+  md: 54rem, // 864px
+  lg: 64rem, // 1024px
+  xl: 80rem // 1280px
+);*/
+
+/*
+The arguments are as follows:
+    $breakpoint: a breakpoint key, from the $breakpoints map above
+    $key: min or max
+    $orientation: can be landscape or portrait. If ommitted, ignored.
+
+Usage example:
+    @import 'breakpoint';
+    @include breakpoint(sm, max) {font-size: 12px;}
+    @include breakpoint(lg, min, landscape) {font-size: 40vh;}
+
+Result:
+    @media (max-width: 32rem) {.selector {font-size: 12px;}}
+    @media (min-with: 64rem) and (orientation: landscape) {.selector {font-size: 40vh;}}
+
+*/
+
+// mobile-first breakpoint mixin
+// @mixin breakpoint($breakpoint: md, $key: min, $orientation: false) {
+//   @if ($orientation) {
+//     @media (#{$key}-width: map-get($breakpoints, $breakpoint)) and (orientation : $orientation) {
+//       @content;
+//     }
+//   } @else {
+//     @media (#{$key}-width: map-get($breakpoints, $breakpoint)) {
+//       @content;
+//     }
+//   }
+// }
